@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 onready var running = $AnimationPlayer
 
+var health = 1
 var gravity = 1000
 var jumpHeight = 600
 var velocity = Vector2.ZERO
@@ -18,3 +19,8 @@ func _physics_process(delta):
 	
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
+
+func Player_hit():
+	health -= 1
+	if health == 0:
+		queue_free()
