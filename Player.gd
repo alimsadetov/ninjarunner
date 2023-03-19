@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal hit
+
 onready var running = $AnimationPlayer
 
 var health = 1
@@ -21,6 +23,7 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, Vector2.UP)
 
 func Player_hit():
+	emit_signal('hit')
 	health -= 1
 	if health == 0:
 		queue_free()
