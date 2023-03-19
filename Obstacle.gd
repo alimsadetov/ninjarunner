@@ -1,10 +1,9 @@
 extends Area2D
 
+onready var speed = get_parent().get_node("Background").backspeed
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
+func _physics_process(delta):
+	position += Vector2.LEFT * speed * delta * 1.5
 
 func _on_Detection_body_entered(body):
 	if body.is_in_group("Player"):
