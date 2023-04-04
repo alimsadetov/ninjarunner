@@ -1,19 +1,23 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://background0.png" type="Texture" id=2]
 [ext_resource path="res://Background.gd" type="Script" id=3]
 [ext_resource path="res://background1.png" type="Texture" id=4]
 [ext_resource path="res://tileset.png" type="Texture" id=5]
-[ext_resource path="res://background2.png" type="Texture" id=6]
-[ext_resource path="res://background3.png" type="Texture" id=7]
+[ext_resource path="res://backgroundmountains.png" type="Texture" id=6]
+[ext_resource path="res://grass.png" type="Texture" id=7]
 [ext_resource path="res://Obstacle.tscn" type="PackedScene" id=8]
 [ext_resource path="res://bionicle-training-card-font-2-4.ttf" type="DynamicFontData" id=9]
 [ext_resource path="res://Score.gd" type="Script" id=10]
-[ext_resource path="res://ground.png" type="Texture" id=11]
+[ext_resource path="res://ground-new.png" type="Texture" id=11]
 [ext_resource path="res://Menu.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Main.gd" type="Script" id=13]
 [ext_resource path="res://SpawnTimer.gd" type="Script" id=14]
+[ext_resource path="res://3.png" type="Texture" id=15]
+[ext_resource path="res://Hearts.gd" type="Script" id=16]
+[ext_resource path="res://Shake.gd" type="Script" id=17]
+[ext_resource path="res://small-grass.png" type="Texture" id=18]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -51,6 +55,7 @@ script = ExtResource( 13 )
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 58, 504 )
 scale = Vector2( 0.8, 0.8 )
+z_index = 5
 
 [node name="Background" type="ParallaxBackground" parent="."]
 script = ExtResource( 3 )
@@ -84,19 +89,34 @@ texture = ExtResource( 6 )
 
 [node name="ParallaxLayer4" type="ParallaxLayer" parent="Background"]
 motion_scale = Vector2( 1.5, 1 )
-motion_mirroring = Vector2( 1790, 0 )
+motion_mirroring = Vector2( 1725, 0 )
 
 [node name="Sprite" type="Sprite" parent="Background/ParallaxLayer4"]
-position = Vector2( 896, 344 )
+position = Vector2( 896, 304 )
 scale = Vector2( 0.874512, 0.78125 )
 z_index = 1
 texture = ExtResource( 7 )
 
-[node name="Sprite2" type="Sprite" parent="Background/ParallaxLayer4"]
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="Background"]
+motion_scale = Vector2( 1.5, 1 )
+motion_mirroring = Vector2( 1730, 0 )
+
+[node name="Sprite2" type="Sprite" parent="Background/ParallaxLayer5"]
 position = Vector2( 896.437, 368 )
 scale = Vector2( 0.874573, 0.610352 )
 z_index = 2
 texture = ExtResource( 11 )
+
+[node name="ParallaxLayer6" type="ParallaxLayer" parent="Background"]
+position = Vector2( 1306, -3 )
+motion_scale = Vector2( 3, 1 )
+motion_mirroring = Vector2( 8000, 0 )
+
+[node name="Sprite2" type="Sprite" parent="Background/ParallaxLayer6"]
+position = Vector2( 897, 372 )
+scale = Vector2( 0.874573, 0.610352 )
+z_index = 2
+texture = ExtResource( 18 )
 
 [node name="Ground" type="TileMap" parent="."]
 visible = false
@@ -125,6 +145,7 @@ wait_time = 0.15
 autostart = true
 
 [node name="Menu" parent="." instance=ExtResource( 12 )]
+pause_mode = 2
 
 [node name="Obstacle" parent="." instance=ExtResource( 8 )]
 position = Vector2( 1136, 480 )
@@ -135,6 +156,20 @@ z_index = 3
 autostart = true
 script = ExtResource( 14 )
 
+[node name="Hearts" type="Sprite" parent="."]
+position = Vector2( 920, 40 )
+texture = ExtResource( 15 )
+script = ExtResource( 16 )
+
+[node name="Shake" type="Node2D" parent="."]
+script = ExtResource( 17 )
+
+[node name="Camera" type="Camera2D" parent="Shake"]
+position = Vector2( 512, 304 )
+current = true
+
 [connection signal="hit" from="Player" to="." method="_on_Player_hit"]
+[connection signal="hit" from="Player" to="Shake" method="_on_Player_hit"]
 [connection signal="timeout" from="Control/Score/ScoreTimer" to="Control/Score" method="_on_ScoreTimer_timeout"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
+[connection signal="minusheart" from="Hearts" to="Hearts" method="_on_Hearts_minusheart"]

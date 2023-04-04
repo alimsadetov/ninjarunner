@@ -16,8 +16,13 @@ func _ready():
 #	pass
 
 
-func _on_Player_hit():
-	$Menu.show_gameover() # Replace with function body.
+func _on_Player_hit(health):
+	if (health == 0):
+		$Menu.show_gameover() # Replace with function body.
+		$Background.backspeed = 0
+		get_node("Obstacle").queue_free()
+		yield(get_tree().create_timer(0.5), "timeout")
+		get_tree().paused = true
 
 
 func _on_SpawnTimer_timeout():

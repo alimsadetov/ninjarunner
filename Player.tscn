@@ -1,7 +1,25 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Orochimaru-sprite-obshiy.png" type="Texture" id=2]
+
+[sub_resource type="Animation" id=6]
+resource_name = "Atack"
+length = 0.9
+loop = true
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.16, 0.31, 0.45, 0.59, 0.74 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 10, 11, 12, 13, 14, 15 ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "Falling"
@@ -64,13 +82,15 @@ position = Vector2( 83, 518 )
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 122, -11 )
+position = Vector2( 156, -42 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 hframes = 5
-vframes = 2
+vframes = 4
+frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Atack = SubResource( 6 )
 anims/Falling = SubResource( 5 )
 anims/Jumping = SubResource( 3 )
 anims/Running = SubResource( 2 )
