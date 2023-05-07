@@ -1,7 +1,7 @@
 extends Node2D
 
 var shakestrength = 1
-var randomshakestrength = 30
+var randomshakestrength = 100
 
 onready var shakedecay = 5
 onready var camera = $Camera

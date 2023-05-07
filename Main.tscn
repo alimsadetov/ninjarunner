@@ -1,23 +1,26 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://background0.png" type="Texture" id=2]
+[ext_resource path="res://background-mountains-new.png" type="Texture" id=2]
 [ext_resource path="res://Background.gd" type="Script" id=3]
 [ext_resource path="res://background1.png" type="Texture" id=4]
 [ext_resource path="res://tileset.png" type="Texture" id=5]
-[ext_resource path="res://backgroundmountains.png" type="Texture" id=6]
-[ext_resource path="res://grass.png" type="Texture" id=7]
+[ext_resource path="res://background-sky-new.png" type="Texture" id=6]
+[ext_resource path="res://background-ground-new.png" type="Texture" id=7]
 [ext_resource path="res://Obstacle.tscn" type="PackedScene" id=8]
 [ext_resource path="res://bionicle-training-card-font-2-4.ttf" type="DynamicFontData" id=9]
 [ext_resource path="res://Score.gd" type="Script" id=10]
-[ext_resource path="res://ground-new.png" type="Texture" id=11]
-[ext_resource path="res://Menu.tscn" type="PackedScene" id=12]
+[ext_resource path="res://background-grass-new.png" type="Texture" id=11]
+[ext_resource path="res://game2.mp3" type="AudioStream" id=12]
 [ext_resource path="res://Main.gd" type="Script" id=13]
 [ext_resource path="res://SpawnTimer.gd" type="Script" id=14]
 [ext_resource path="res://3.png" type="Texture" id=15]
 [ext_resource path="res://Hearts.gd" type="Script" id=16]
 [ext_resource path="res://Shake.gd" type="Script" id=17]
 [ext_resource path="res://small-grass.png" type="Texture" id=18]
+[ext_resource path="res://Dzubito.tscn" type="PackedScene" id=19]
+[ext_resource path="res://ninjarunner.icon.png" type="Texture" id=27]
+[ext_resource path="res://RestartMenu.tscn" type="PackedScene" id=30]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -49,13 +52,22 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 size = 48
 font_data = ExtResource( 9 )
 
+[sub_resource type="CanvasItemMaterial" id=8]
+blend_mode = 4
+light_mode = 2
+
+[sub_resource type="CanvasItemMaterial" id=7]
+blend_mode = 4
+light_mode = 2
+
 [node name="Main" type="Node2D"]
 script = ExtResource( 13 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 58, 504 )
-scale = Vector2( 0.8, 0.8 )
+position = Vector2( 64, 504 )
+scale = Vector2( 1.1, 1.1 )
 z_index = 5
+collision_layer = 2
 
 [node name="Background" type="ParallaxBackground" parent="."]
 script = ExtResource( 3 )
@@ -67,7 +79,7 @@ motion_mirroring = Vector2( 1790, 0 )
 [node name="Sprite" type="Sprite" parent="Background/ParallaxLayer"]
 position = Vector2( 895.5, 300 )
 scale = Vector2( 0.874512, 0.78125 )
-texture = ExtResource( 2 )
+texture = ExtResource( 6 )
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="Background"]
 motion_scale = Vector2( 0.15, 1 )
@@ -83,19 +95,19 @@ motion_scale = Vector2( 0.4, 1 )
 motion_mirroring = Vector2( 1655, 0 )
 
 [node name="Sprite" type="Sprite" parent="Background/ParallaxLayer3"]
-position = Vector2( 895.5, 300 )
+position = Vector2( 896, 344 )
 scale = Vector2( 0.874512, 0.78125 )
-texture = ExtResource( 6 )
+texture = ExtResource( 2 )
 
 [node name="ParallaxLayer4" type="ParallaxLayer" parent="Background"]
 motion_scale = Vector2( 1.5, 1 )
 motion_mirroring = Vector2( 1725, 0 )
 
 [node name="Sprite" type="Sprite" parent="Background/ParallaxLayer4"]
-position = Vector2( 896, 304 )
+position = Vector2( 896, 328 )
 scale = Vector2( 0.874512, 0.78125 )
 z_index = 1
-texture = ExtResource( 7 )
+texture = ExtResource( 11 )
 
 [node name="ParallaxLayer5" type="ParallaxLayer" parent="Background"]
 motion_scale = Vector2( 1.5, 1 )
@@ -105,9 +117,10 @@ motion_mirroring = Vector2( 1730, 0 )
 position = Vector2( 896.437, 368 )
 scale = Vector2( 0.874573, 0.610352 )
 z_index = 2
-texture = ExtResource( 11 )
+texture = ExtResource( 7 )
 
 [node name="ParallaxLayer6" type="ParallaxLayer" parent="Background"]
+visible = false
 position = Vector2( 1306, -3 )
 motion_scale = Vector2( 3, 1 )
 motion_mirroring = Vector2( 8000, 0 )
@@ -124,7 +137,7 @@ z_as_relative = false
 tile_set = SubResource( 2 )
 cell_size = Vector2( 32, 32 )
 format = 1
-tile_data = PoolIntArray( 1179648, 0, 0, 1179649, 0, 0, 1179650, 0, 0, 1179651, 0, 0, 1179652, 0, 0, 1179653, 0, 0, 1179654, 0, 0, 1179655, 0, 0, 1179656, 0, 0, 1179657, 0, 0, 1179658, 0, 0, 1179659, 0, 0, 1179660, 0, 0, 1179661, 0, 0, 1179662, 0, 0, 1179663, 0, 0, 1179664, 0, 0, 1179665, 0, 0, 1179666, 0, 0, 1179667, 0, 0, 1179668, 0, 0, 1179669, 0, 0, 1179670, 0, 0, 1179671, 0, 0, 1179672, 0, 0, 1179673, 0, 0, 1179674, 0, 0, 1179675, 0, 0, 1179676, 0, 0, 1179677, 0, 0, 1179678, 0, 0, 1179679, 0, 0 )
+tile_data = PoolIntArray( 1179648, 0, 0, 1179649, 0, 0, 1179650, 0, 0, 1179651, 0, 0, 1179652, 0, 0, 1179653, 0, 0, 1179654, 0, 0, 1179655, 0, 0, 1179656, 0, 0, 1179657, 0, 0, 1179658, 0, 0, 1179659, 0, 0, 1179660, 0, 0, 1179661, 0, 0, 1179662, 0, 0, 1179663, 0, 0, 1179664, 0, 0, 1179665, 0, 0, 1179666, 0, 0, 1179667, 0, 0, 1179668, 0, 0, 1179669, 0, 0, 1179670, 0, 0, 1179671, 0, 0, 1179672, 0, 0, 1179673, 0, 0, 1179674, 0, 0, 1179675, 0, 0, 1179676, 0, 0, 1179677, 0, 0, 1179678, 0, 0, 1179679, 0, 0, 1179680, 0, 0, 1179681, 0, 0, 1179682, 0, 0, 1179683, 0, 0, 1179684, 0, 0, 1179685, 0, 0, 1179686, 0, 0, 1179687, 0, 0, 1179688, 0, 0, 1179689, 0, 0, 1179690, 0, 0, 1179691, 0, 0, 1179692, 0, 0, 1179693, 0, 0, 1179694, 0, 0 )
 
 [node name="Control" type="Control" parent="."]
 margin_left = 1.0
@@ -144,12 +157,9 @@ script = ExtResource( 10 )
 wait_time = 0.15
 autostart = true
 
-[node name="Menu" parent="." instance=ExtResource( 12 )]
-pause_mode = 2
-
 [node name="Obstacle" parent="." instance=ExtResource( 8 )]
-position = Vector2( 1136, 480 )
-scale = Vector2( 1.5, 1.5 )
+position = Vector2( 1136, 448 )
+scale = Vector2( 2, 2 )
 z_index = 3
 
 [node name="SpawnTimer" type="Timer" parent="."]
@@ -167,6 +177,33 @@ script = ExtResource( 17 )
 [node name="Camera" type="Camera2D" parent="Shake"]
 position = Vector2( 512, 304 )
 current = true
+
+[node name="TouchScreenButton2" type="TouchScreenButton" parent="."]
+material = SubResource( 8 )
+position = Vector2( 512, 0 )
+scale = Vector2( 8.11468, 9.56525 )
+normal = ExtResource( 27 )
+action = "atack"
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+material = SubResource( 7 )
+position = Vector2( 2.27374e-13, 3.8147e-06 )
+scale = Vector2( 7.98215, 10.068 )
+normal = ExtResource( 27 )
+action = "jump"
+
+[node name="RestartMenu" parent="." instance=ExtResource( 30 )]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+volume_db = -14.857
+autoplay = true
+
+[node name="Dzubito" parent="." instance=ExtResource( 19 )]
+position = Vector2( 1320, 768 )
+
+[node name="sounds" type="AudioStreamPlayer" parent="."]
+volume_db = 6.991
 
 [connection signal="hit" from="Player" to="." method="_on_Player_hit"]
 [connection signal="hit" from="Player" to="Shake" method="_on_Player_hit"]
